@@ -1,2 +1,3 @@
-#Python mvc pattern
-A simple mvc project
+#Python-mvc-pattern
+
+**A simple mvc project**
