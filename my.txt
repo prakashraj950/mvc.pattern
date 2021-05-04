@@ -1,0 +1,17 @@
+def Create():
+        cursor = con.cursor()
+        query1= """CREATE TABLE IF NOT EXISTS "users" (
+	"userid"	INTEGER,
+	"fname"	TEXT NOTNULL,
+	"lname"	TEXT,
+	"username"	TEXT NOTNULL,
+	"password"	TEXT NOTNULL,
+	"email"	TEXT NOTNULL UNIQUE,
+	"contact"	INTEGER NOTNULL,
+	"date"	INTEGER,
+	"address"	TEXT NOTNULL,
+	PRIMARY KEY("userid")
+"""
+        cursor.execute(query1)
+    if Connect is True:
+        Sql.Create()
