@@ -6,7 +6,29 @@ class account:
     
     def __init__(self):
         self.__connection=Sql.Connect()
-    
+
+    def Save(self,users):
+        if self.__isvalid(users):
+            if self.__sendToDatabase(users):
+                users.setMessage(f"users {users.getUsername()} was registered")
+            
+        else:
+            users.setMessage("please fill in the field")
+    def __sendToDatabase(self,users):
+        try:
+           cursor = self.__connection.cursor()
+           query = f"INSERT into 'users' VALUES('NULL','{users.getFname()}','{users.getLname()}','{users.getUsername()}','{users.getPassword()}','{users.getEmail()}','{users.getContact()}','CURRENT_DATE','{users.getAddress()}')"
+           cursor.execute(query)
+           return True
+        except Exception as e:
+            users.getMessage(e)
+            return False
+
+    def __isvalid(self,users):
+        if users.getFname()!="" and users.getLname()!= "" and users.getUsername()!="" and users.getPassword()!="" and users.getEmail()!="" and users.getContact()!="" and users.getAddress()!="":
+            return True
+        return False
+
     def Login(self,users):
         if self.__isvalidLogin(users):
             if self.__isAuthentic(users):
@@ -32,5 +54,4 @@ class account:
         self.__connection.commit()
     def __Authorize(self,users):
         users.setMessage(f"{users.getUsername()},is logined....")
-
 
